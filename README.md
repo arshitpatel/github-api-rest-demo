@@ -26,7 +26,7 @@ java -jar demo-0.0.1-SNAPSHOT.jar
 
 API endpoint : `/search/repositories/{language}`. Where we can search repos by language name. 
 Method type : `GET`
-Headers : All headers are optionals.
+#### Headers : All headers are optionals.
 
 ```
 sort -> Sorts the results of your query by number of stars, forks, or help-wanted-issues or how recently the items were updated.
