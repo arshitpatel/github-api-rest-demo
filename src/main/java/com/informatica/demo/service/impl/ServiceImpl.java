@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.informatica.demo.exception.InternalServerException;
 import com.informatica.demo.response.GitHubResponse;
 import com.informatica.demo.service.IService;
 
@@ -36,10 +37,15 @@ public class ServiceImpl implements IService {
 
 		String query = buildQuery(langName, sort, order, perPage, page);
 
-		ResponseEntity<GitHubResponse> resp = restTemplate.exchange(baseUrl + SEARCH_REPO + query, HttpMethod.GET,
-				entity, GitHubResponse.class);
+		try {
 
-		return resp.getBody();
+			ResponseEntity<GitHubResponse> resp = restTemplate.exchange(baseUrl + SEARCH_REPO + query, HttpMethod.GET,
+					entity, GitHubResponse.class);
+
+			return resp.getBody();
+		} catch (Exception e) {
+			throw new InternalServerException("Exception while calling git API", e);
+		}
 
 	}
 
@@ -51,7 +57,7 @@ public class ServiceImpl implements IService {
 		}
 		if (order != null) {
 			query += "&order=" + order;
-		}		
+		}
 		if (perPage != null) {
 			query += "&per_page=" + perPage;
 		}

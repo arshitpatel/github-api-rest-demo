@@ -44,10 +44,13 @@ curl -X GET \
   -H 'perPage: 3'
 ```
 
-#### Sample Output
+#### Sample Output 200
 
 ```
 {
+    "metaData": {
+        "status": "200 OK"
+    },
     "items": [
         {
             "owner": {
@@ -74,6 +77,19 @@ curl -X GET \
             "git_url": "git://github.com/compiler-explorer/compiler-explorer.git"
         }
     ]
+}
+
+```
+
+#### Sample Output 500
+
+```
+{
+    "metaData": {
+        "error": "Request Failed due to Internal Server Error.",
+        "status": "500 INTERNAL_SERVER_ERROR"
+    },
+    "items": null
 }
 
 ```
